@@ -163,11 +163,13 @@ button:focus {
 /* Home */
 #home {
   position: relative;
+  display: flex;
   background-color: var(--color-primary);
   background-image: var(--home-bg-svg);
   color: var(--color-text);
   padding: 5rem 1rem;
   padding-top: 7rem;
+  justify-content: center;
   text-align: center;
   overflow: hidden;
 }
