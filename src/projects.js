@@ -31,3 +31,30 @@ function filterProjects(filter) {
     projectsContainer.classList.remove("anim-out");
   }, 250);
 }
+
+function getProjectCount(category) {
+  if (category === "all") {
+    return projects.length;
+  } else {
+    const filteredProjects = document.querySelectorAll(
+      `.project[data-type="${category}"]`
+    );
+    return filteredProjects.length;
+  }
+}
+
+categories.addEventListener("mouseover", (event) => {
+  const category = event.target.dataset.category;
+  if (category != null) {
+    const countSpan = event.target.querySelector(".category__count");
+    const count = getProjectCount(category);
+    countSpan.textContent = count;
+  }
+});
+
+const allButton = document.querySelector('.category[data-category="all"]');
+allButton.addEventListener("mouseover", () => {
+  const countSpan = allButton.querySelector(".category__count");
+  const count = getProjectCount("all");
+  countSpan.textContent = count;
+});
