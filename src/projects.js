@@ -34,27 +34,41 @@ function filterProjects(filter) {
 
 function getProjectCount(category) {
   if (category === "all") {
-    return projects.length;
-  } else {
-    const filteredProjects = document.querySelectorAll(
-      `.project[data-type="${category}"]`
+    const allProjects = document.querySelectorAll(".project");
+    return allProjects.length;
+  } else if (category === "front-end") {
+    const frontEndProjects = document.querySelectorAll(
+      ".project[data-type='front-end']"
     );
-    return filteredProjects.length;
+    return frontEndProjects.length;
+  } else if (category === "back-end") {
+    const backEndProjects = document.querySelectorAll(
+      ".project[data-type='back-end']"
+    );
+    return backEndProjects.length;
+  } else {
+    return 0;
   }
 }
 
-categories.addEventListener("mouseover", (event) => {
+function updateProjectCount(category) {
+  const countSpan = document.querySelector(
+    `.category[data-category="${category}"] .category__count`
+  );
+  const count = getProjectCount(category);
+  countSpan.textContent = count;
+}
+
+function categoryMouseOverHandler(event) {
   const category = event.target.dataset.category;
   if (category != null) {
-    const countSpan = event.target.querySelector(".category__count");
-    const count = getProjectCount(category);
-    countSpan.textContent = count;
+    updateProjectCount(category);
   }
+}
+
+const categoryButtons = document.querySelectorAll(".category");
+categoryButtons.forEach((button) => {
+  button.addEventListener("mouseover", categoryMouseOverHandler);
 });
 
-const allButton = document.querySelector('.category[data-category="all"]');
-allButton.addEventListener("mouseover", () => {
-  const countSpan = allButton.querySelector(".category__count");
-  const count = getProjectCount("all");
-  countSpan.textContent = count;
-});
+updateProjectCount("all");
