@@ -46,6 +46,11 @@ function getProjectCount(category) {
       ".project[data-type='back-end']"
     );
     return backEndProjects.length;
+  } else if (category === "mobile") {
+    const mobileProjects = document.querySelectorAll(
+      ".project[data-type='mobile']"
+    );
+    return mobileProjects.length;
   } else {
     return 0;
   }
